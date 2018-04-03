@@ -226,3 +226,12 @@ h.4 <- h.2 +
 h.4
 ```
 
+Great. Now let's export both graphs.
+
+```{r graph-export}
+g.5
+ggsave(filename = "graph.1.png", width = 6.5, height = 4.25)
+h.4
+ggsave(filename = "graph.2.png", width = 6.5, height = 4.25)
+```
+

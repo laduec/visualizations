@@ -173,12 +173,36 @@ h.1 <- h + custom.theme +
 h.1 # view updated graph
 ```
 
-Adding error bars to the graph will help readers better understand the data. And we calculated standard error during the data wrangling phase.
+Adding error bars to the graph will help readers better understand the data. And we calculated standard deviation during the data wrangling phase.
 
 ```{r error-bars}
 
 h.2 <- h.1 + 
+  geom_errorbar(aes(ymin=mean-stdev, ymax=mean+stdev, width=.2))
+
+h.2
+```
+
+This is good. But standard deviation may be artificially large in some genera due to sampling effort. To add another layer of interpretation of the data, we can base the color of the bars on sample size (n). We also calculated this statistic during the data wrangling phase.
+
+```{r bar-color}
+
+# First, we need to go back and edit our layout of the graph.
+h <- plot.data %>% 
+  ggplot(aes(x = genus, y = mean, fill=n)) +
+  geom_bar(stat="identity")
+h.1 <- h + custom.theme +
+  xlab("Genus") + 
+  ylab("Average sampling canopy height (m)") + 
+  ggtitle("Relationship between\nGenus and Canopy Height") + 
+  theme(axis.text.x = element_text(angle=30, hjust=1, vjust=1, face = "italic"))
+h.2 <- h.1 + 
   geom_errorbar(aes(ymin=mean-sterr, ymax=mean+sterr, width=.2))
+
+h.3 <- h.2 +
+  scale_fill_gradient(low = "lightsteelblue1", high = "royalblue4", name = "Number of samples")
+
+h.3
 
 ```
 

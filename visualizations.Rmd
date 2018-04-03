@@ -4,12 +4,13 @@ date: "March 28, 2018"
 output: html_notebook
 ---
 
-Today we are going to talk about how to visualize data in R.  There are multiple packages that can be used for this, including base R.  Base R has all the tools and functions needed to effectively communicate results.  That said, more recent packages offer a more modular approach to building visualizations using a *grammer of graphics*.  This class will focus on using the `ggplot2` library for plotting and visualizations.
+Today we are going to talk about how to visualize data in R.  There are multiple packages that can be used for this, including base R.  Base R has all the tools and functions needed to effectively communicate results.  That said, more recent packages offer a more modular approach to building visualizations using a *grammar of graphics*.  This class will focus on using the `ggplot2` library for plotting and visualizations.
 
 `ggplot2` is developed as part of the `tidyverse`, and loads as a base component of the library.
 
 ```{r libraries}
 library(tidyverse)
+library(ggthemes) # this is extra...for more cool themes you can use
 ```
 
 ## A Simple Plot
@@ -18,7 +19,7 @@ Let's first make a sequence of data to work with.
 
 ```{r simple-data}
 # three sequences of data
-x <- seq(0,1, by=0.1)
+x <- seq(0, 1, by=0.1)
 y <- x
 y2 = x^2
 ```
@@ -67,7 +68,9 @@ Start with the base data object, adding a point to each element.
 
 ```{r add-point}
 # create a very basic point plot
-g + geom_point()
+g + geom_point() # can leave parentheses blank because it's inheriting mapping from g
+
+g + geom_line()
 ```
 
 Notice that the call above did not assign the output to a new variable; we simply generated the plot using the base data object and assigning the aesthetics to a point geometry.  We can easily assign the output to a variable for use later or to save, but it's not necessary if you only want to see the plot.
@@ -159,6 +162,8 @@ g + geom_point(aes(color = y2, size = y2, fill = y2), shape=24) +
   ggtitle("Our First Amazing Plot\nNow with TWO Variables!") + 
   theme_dark() +
   theme(legend.box = "horizontal")
+
+ggsave(filename = "testplot.png") # this function will save the last plot object, but if your plot is stored in your environment, you can use "plot =" to specify
 ```
 
 

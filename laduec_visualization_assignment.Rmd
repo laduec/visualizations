@@ -178,7 +178,7 @@ Adding error bars to the graph will help readers better understand the data. And
 ```{r error-bars}
 
 h.2 <- h.1 + 
-  geom_errorbar(aes(ymin=mean-stdev, ymax=mean+stdev, width=.2))
+  geom_errorbar(aes(ymin=mean-sterr, ymax=mean+sterr, width=.2))
 
 h.2
 ```
@@ -202,7 +202,27 @@ h.2 <- h.1 +
 h.3 <- h.2 +
   scale_fill_gradient(low = "lightsteelblue1", high = "royalblue4", name = "Number of samples")
 
-h.3
+h.3 # view updated graph
 
+```
+
+This looks good. But perhaps data interpretation would be even easier if the bars were organized in descending order by mean canopy height. Let's try to do that.
+
+```{r descending-bars}
+h <- plot.data %>% 
+  ggplot(aes(x =reorder(genus, -mean), y = mean, fill=n)) + #this is the code I changed to reorder bars
+  geom_bar(stat="identity")
+h.1 <- h + custom.theme +
+  xlab("Genus") + 
+  ylab("Average sampling canopy height (m)") + 
+  ggtitle("Relationship between\nGenus and Canopy Height") + 
+  theme(axis.text.x = element_text(angle=30, hjust=1, vjust=1, face = "italic"))
+h.2 <- h.1 + 
+  geom_errorbar(aes(ymin=mean-sterr, ymax=mean+sterr, width=.2))
+h.4 <- h.2 +
+  scale_fill_gradient(low = "lightsteelblue1", high = "royalblue4", name = "Number of samples") +
+  scale_y_continuous(breaks=seq(0,6,by=1)) # I also changed this to make the y-axis tick marks more precise
+
+h.4
 ```
 

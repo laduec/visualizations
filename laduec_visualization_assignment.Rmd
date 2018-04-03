@@ -35,6 +35,16 @@ Let's start off by providing appropriate labels for the title, axes, and legend.
 
 # data description is available in file "veg_metadata_desc_DataInstitute2016.csv"
 
+# Future self: to get rid of error message of replacing color gradient argument, let's eliminate that from g real quick:
+
+g <- sjer_veg %>% 
+  select(maxcanopydiam, stemheight, livingcanopy) %>% 
+  ggplot(aes(x = stemheight, y = maxcanopydiam)) + 
+    geom_point(aes(color = livingcanopy)) #+
+#    scale_color_gradient(low = "red", high = "green")
+
+# That's better. Now we can proceed.
+
 g.1 <- g +
   scale_color_gradient(low = "red", high = "green", name = "% of canopy alive") + # legend label
   xlab("Distance from ground to highest stem (m)") + # added x-axis label
@@ -42,5 +52,40 @@ g.1 <- g +
   ggtitle("Relationship between\nCanopy Diameter and Distance to Highest Stem") # graph title
 
 g.1 # view updated graph
+```
+
+Now readers can better understand what's being plotted and compared. Let's change the look of this graph now by changing the theme and cleaning up unnecessary elements.
+
+```{r theme-change}
+
+custom.theme <- theme(panel.grid.major = element_blank(), # these lines gets rid of distracting grid in background
+                      panel.grid.minor = element_blank(),
+                      panel.background = element_rect(fill="white"),
+                      axis.line = element_line(colour="black"), # this changes axes lines to black
+                      axis.text.x = element_text(colour="black", size=10), # changes axes text (numbers)
+                      axis.text.y = element_text(colour="black", size=10),
+                      axis.title.x = element_text(colour="black", size=12, face="bold"), # changes axes labels
+                      axis.title.y = element_text(colour="black", size=12, face="bold"),
+                      plot.title = element_text(hjust=0.5), # centers plot title
+                      legend.title = element_text(face="bold", size=10), # changes legend title text
+                      legend.title.align = 0.5, # centers legend title
+                      legend.text = element_text(size=8), # changes legend text
+                      legend.background = element_rect(fill="#F6F6F6", colour = "black")) # adds background and border to legend
+
+g.2 <- g.1 + custom.theme
+
+g.2
+```
+
+With cleaned-up graph, it is difficult to estimate the values of the points on the graph. A solution to this problem is to increase the frequency of tick marks.
+
+```{r tick-marks}
+
+g.3 <- g.2 + 
+  scale_y_continuous(breaks=seq(0,35,by=5)) + # sets tick marks every 5 units on y axis
+  scale_x_continuous(breaks=seq(0,30,by=2)) # sets tick marks every 2 units on x axis
+
+g.3
+
 ```
 

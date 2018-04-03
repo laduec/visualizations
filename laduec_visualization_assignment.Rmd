@@ -106,3 +106,48 @@ g.4 <- g.3 +
 g.4 # view updated graph
 ```
 
+Let's put a linear regression line on top of the data.
+
+```{r regression}
+
+# First, create the linear model:
+
+model <- lm(maxcanopydiam ~ stemheight, sjer_veg)
+summary(model)
+
+# We find out the r^2 value is 0.5221. We can add this as an annotation to the chart.
+
+g.5 <- g.4 + 
+  stat_smooth(method=lm, formula=y~x, se=FALSE, colour="blue", linetype="dotted") + #adding the linear model line
+  annotate("text", label="r^2 == 0.52", parse = TRUE, x= 22, y = 0, col = "blue") #adding the r^2 value
+
+g.5 # view updated graph
+
+```
+
+Let's take a look at the other dataset.
+
+```{r load-data-2}
+
+data.2 <- read_csv("data/D17_2013_SJER_foliarChem.csv")
+
+View(data.2)
+
+```
+
+Since I'm unfamiliar with the dataset, let's plan on just plotting the average height of each genus. To begin, let's look at the data with `dplyr`.
+
+```{r data-wrangle}
+
+data.2 %>% 
+  group_by(genus) %>% 
+  summarize(mean = mean(avg_canopy_ht), n = n())
+
+```
+
+It seems like the best way to summarize these data in a plot is with a bar graph, with each bar representing the average height for a given genus. Sounds like a plan.
+
+```{r initial-plot}
+
+```
+

@@ -139,15 +139,25 @@ Since I'm unfamiliar with the dataset, let's plan on just plotting the average h
 
 ```{r data-wrangle}
 
-data.2 %>% 
+data.3 <- data.2 %>% 
   group_by(genus) %>% 
-  summarize(mean = mean(avg_canopy_ht), n = n())
+  summarize(mean = mean(avg_canopy_ht), n = n(), stdev = sd(avg_canopy_ht), sterr = (stdev/n))
+
+
+plot.data <- data.3 %>% 
+    arrange(desc(mean))
 
 ```
 
-It seems like the best way to summarize these data in a plot is with a bar graph, with each bar representing the average height for a given genus. Sounds like a plan.
+It seems like the best way to summarize these data in a plot is with a bar graph, with each bar representing the average height for a given genus. Sounds like a plan. Let's start by setting up the plot.
 
 ```{r initial-plot}
 
+h <- plot.data %>% 
+  ggplot(aes(x = genus, y = mean)) +
+  geom_bar(stat="identity")
+
+h
 ```
 
+Ok. Let's clean up this graph. We can use the custom theme that I used in the last plot, and tweak some other things.

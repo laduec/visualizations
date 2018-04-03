@@ -1,0 +1,29 @@
+---
+title: "Visualizations Assignment"
+author: "Chase LaDue"
+date: "4/3/2018"
+output: html_document
+---
+
+First, I'll start with the code that was given in `working_example.Rmd`.
+
+```{r package-data}
+
+library(tidyverse) # loading package
+
+sjer_veg <- read_csv("data/D17_2013_SJER_vegStr.csv") # loading data
+
+```
+
+Now, let's plot the graph that we'll be starting with.
+
+```{r base-graph}
+
+g <- sjer_veg %>% 
+  select(maxcanopydiam, stemheight, livingcanopy) %>% 
+  ggplot(aes(x = stemheight, y = maxcanopydiam)) + 
+    geom_point(aes(color = livingcanopy)) +
+    scale_color_gradient(low = "red", high = "green")
+
+```
+

@@ -58,7 +58,9 @@ sjer_veg %>%
   select(maxcanopydiam, stemheight, livingcanopy) %>% 
   ggplot(aes(x = stemheight, y = maxcanopydiam)) + 
     geom_point(aes(color = livingcanopy)) +
-    scale_color_gradient(low = "red", high = "green")
+    scale_color_gradient(low = "red", high = "green") +
+    xlab("Distance from ground to highest stem (m)") + # added x-axis label
+    ylab("Maximum canopy diameter (m)") # added y-axis label
 
 # how can we improve this plot?
 ```

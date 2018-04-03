@@ -110,7 +110,7 @@ g + geom_point() +
 # different arguments, color, size and fill in this case.
 g + geom_point() + # plot our original x, y data
   geom_point(aes(x, y2)) + # co-plot a second variable
-  ggtitle("Our First Amazing Plot\nNow with TWO Variables!") +
+  ggtitle("Our First Amazing Plot Now\nwith TWO Variables!") +
   xlab("Shared X Coordinates") +
   ylab("Y Label") + 
   theme_classic() # a different theme
@@ -121,7 +121,7 @@ Now that we have visualized several elements, we can learn how to further refine
 ```{r add-scaled-color}
 g + geom_point() +
   geom_point(aes(x, y2), color="lightblue", size=4) + # co-plot a second variable with a different color
-  geom_line(aes(x, y2), linetype="dashed", size=1.5, alpha=0.6) + #add a transparent dashed line to the y2 line
+  geom_line(aes(x, y2), linetype="dashed", size=1.5, alpha=0.5) + #add a transparent dashed line to the y2 line
   ggtitle("Our First Amazing Plot\nNow with TWO Variables!") +
   xlab("Shared X Coordinates") +
   ylab("Y Label") + 

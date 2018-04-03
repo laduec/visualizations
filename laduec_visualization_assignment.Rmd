@@ -161,3 +161,15 @@ h
 ```
 
 Ok. Let's clean up this graph. We can use the custom theme that I used in the last plot, and tweak some other things.
+
+```{r clean-up-graph-2}
+
+h.1 <- h + custom.theme +
+  xlab("Genus") + # added x-axis label
+  ylab("Average sampling canopy height (m)") + # added y-axis label
+  ggtitle("Relationship between\nGenus and Canopy Height") + # graph title
+  theme(axis.text.x = element_text(angle=30, hjust=1, vjust=1, face = "italic")) # put tick labels at an angle and italicize genus names
+  
+h.1
+```
+

@@ -25,5 +25,22 @@ g <- sjer_veg %>%
     geom_point(aes(color = livingcanopy)) +
     scale_color_gradient(low = "red", high = "green")
 
+g # view graph
+
+```
+
+Let's start off by providing appropriate labels for the title, axes, and legend.
+
+```{r labels}
+
+# data description is available in file "veg_metadata_desc_DataInstitute2016.csv"
+
+g.1 <- g +
+  scale_color_gradient(low = "red", high = "green", name = "% of canopy alive") + # legend label
+  xlab("Distance from ground to highest stem (m)") + # added x-axis label
+  ylab("Maximum canopy diameter (m)") + # added y-axis label
+  ggtitle("Relationship between\nCanopy Diameter and Distance to Highest Stem") # graph title
+
+g.1 # view updated graph
 ```
 

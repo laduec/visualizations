@@ -170,6 +170,15 @@ h.1 <- h + custom.theme +
   ggtitle("Relationship between\nGenus and Canopy Height") + # graph title
   theme(axis.text.x = element_text(angle=30, hjust=1, vjust=1, face = "italic")) # put tick labels at an angle and italicize genus names
   
-h.1
+h.1 # view updated graph
+```
+
+Adding error bars to the graph will help readers better understand the data. And we calculated standard error during the data wrangling phase.
+
+```{r error-bars}
+
+h.2 <- h.1 + 
+  geom_errorbar(aes(ymin=mean-sterr, ymax=mean+sterr, width=.2))
+
 ```
 

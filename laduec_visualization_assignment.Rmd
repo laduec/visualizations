@@ -66,7 +66,7 @@ custom.theme <- theme(panel.grid.major = element_blank(), # these lines gets rid
                       axis.text.y = element_text(colour="black", size=10),
                       axis.title.x = element_text(colour="black", size=12, face="bold"), # changes axes labels
                       axis.title.y = element_text(colour="black", size=12, face="bold"),
-                      plot.title = element_text(hjust=0.5), # centers plot title
+                      plot.title = element_text(face="bold",hjust=0.5), # centers plot title
                       legend.title = element_text(face="bold", size=10), # changes legend title text
                       legend.title.align = 0.5, # centers legend title
                       legend.text = element_text(size=8), # changes legend text
@@ -87,5 +87,22 @@ g.3 <- g.2 +
 
 g.3
 
+```
+
+There seems to be one point that does not follow the same pattern as the rest: it has low distance to highest stem, but large canopy diameter. Therefore, this point may be of interest to researchers. Let's label that point with its individual id...this data is contained in the column "indvidual_id", which is the auto-assigned unique stem identification number.
+
+```{r annotate}
+
+# First, let's find the point of interest
+sjer_veg %>%
+  filter(maxcanopydiam > 30) %>% 
+  select(indvidualid, stemheight, maxcanopydiam)
+
+# So we know the ID of the point is 1452, and its coordinates are (0.6, 34)
+
+g.4 <- g.3 +
+  annotate("text", x=2, y=34, size=3, label = "1452", col = "blue") # moved the text a bit to the right so it doesn't cover point
+
+g.4
 ```
 

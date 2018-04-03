@@ -74,7 +74,7 @@ custom.theme <- theme(panel.grid.major = element_blank(), # these lines gets rid
 
 g.2 <- g.1 + custom.theme
 
-g.2
+g.2 # view updated graph
 ```
 
 With cleaned-up graph, it is difficult to estimate the values of the points on the graph. A solution to this problem is to increase the frequency of tick marks.
@@ -85,7 +85,7 @@ g.3 <- g.2 +
   scale_y_continuous(breaks=seq(0,35,by=5)) + # sets tick marks every 5 units on y axis
   scale_x_continuous(breaks=seq(0,30,by=2)) # sets tick marks every 2 units on x axis
 
-g.3
+g.3 # view updated graph
 
 ```
 
@@ -103,6 +103,6 @@ sjer_veg %>%
 g.4 <- g.3 +
   annotate("text", x=2, y=34, size=3, label = "1452", col = "blue") # moved the text a bit to the right so it doesn't cover point
 
-g.4
+g.4 # view updated graph
 ```
 
